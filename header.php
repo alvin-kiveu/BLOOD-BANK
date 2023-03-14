@@ -1,3 +1,9 @@
+<?php
+//START SESSION
+session_start();
+include 'include/connection.php';
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -41,10 +47,18 @@
                         <a class="nav-item nav-link disabled" href="#">Disabled</a>
                     </div>
                 </div>
-                <div>
-                    <a href="login.php" class="btn btn-outline-light">Login</a>
-                    <a href="signup.php" class="btn btn-outline-light">Sign up</a>
-                </div>
+                <?php
+
+                if (isset($_SESSION['username'])) {
+                    echo '<div>
+                    <a href="logout.php" class="text-light text-decoration-none">Logout</a>
+                </div>';
+                } else {
+                    echo '<div>
+                    <a href="login.php" class="text-light text-decoration-none">Login</a>
+                    <a href="signup.php" class="text-light text-decoration-none">Sign up</a>
+                </div>';
+                }   ?>
             </div>
         </div>
     </header>

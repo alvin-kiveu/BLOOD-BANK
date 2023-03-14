@@ -26,23 +26,35 @@
   </style>
   <div class="container-fluid h-100 d-flex align-items-center justify-content-center">
     <div class="row shadow-lg  w-50  mb-5 bg-white align-items-center justify-content-center   rounded">
-      <form style="padding:5%;">
+      <form style="padding:5%;" action="include/auth.php" method="post">
         <div class="card-header  align-items-center" style="text-align: center;">
           <img src="img/mainlogo.png" alt="logo" class="img" width="100px">
         </div>
+        <!-- ERROR -->
+        <?php
+
+        if (isset($_GET['error'])) {
+          echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        }
+
+        if (isset($_GET['success'])) {
+          echo '<div class="alert alert-success" role="alert">' . $_GET['success'] . '</div>';
+        }
+
+        ?>
         <fieldset>
           <div class="mb-3">
             <label for="exampleInputEmail1">Username</label>
-            <input type="text" class="form-control w-35" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+            <input type="text" name="username" class="form-control w-35" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" required>
 
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control w-35" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" name="password_1" class="form-control w-35" id="exampleInputPassword1" placeholder="Password" required>
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-outline-primary  form-control font-weight-bold">LOGIN</button>
+            <button type="submit" name="login" class="btn btn-outline-primary  form-control font-weight-bold">LOGIN</button>
           </div>
 
           <div class="form-group mt-4">
