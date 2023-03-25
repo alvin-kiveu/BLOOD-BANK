@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2023 at 03:08 AM
+-- Generation Time: Mar 25, 2023 at 03:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -45,8 +45,49 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`ID`, `fullnames`, `username`, `phone`, `email`, `gender`, `location`, `dob`, `bloodgroup`, `password`) VALUES
-(2, 'Alvin Kiveu Odari', 'Umeskia', '0113015674', 'alvo967@gmail.com', 'Male', 'Nakuru', '2000-03-02', 'A-', '8173306b4dda9469c6b06689a85d4c11'),
-(3, 'Lilian Maharia', 'lily', '0790496720', 'alvo967@gmial.com', 'Female', 'Nairobi', '2005-08-18', 'O+', '8173306b4dda9469c6b06689a85d4c11');
+(4, 'Alvin Kiveu Odari', 'umeskia', '0768168060', 'alvo967@gmail.com', 'Male', 'Nakuru', '2000-03-02', 'O+', '256a73e75672cc991b94aee31c1c61e7');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `ID` int(11) NOT NULL,
+  `username` text NOT NULL,
+  `fullnames` text NOT NULL,
+  `phonenumber` varchar(500) NOT NULL,
+  `location` text NOT NULL,
+  `bloodtype` text NOT NULL,
+  `info` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `requests`
+--
+
+INSERT INTO `requests` (`ID`, `username`, `fullnames`, `phonenumber`, `location`, `bloodtype`, `info`) VALUES
+(1, 'umeskia', 'Alvin Kiveu Odari', '0768168060', 'Nakuru', 'O+', 'mwdkmekdmekdekdwed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL,
+  `username` varchar(500) NOT NULL,
+  `password` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `username`, `password`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Indexes for dumped tables
@@ -59,6 +100,18 @@ ALTER TABLE `members`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -66,7 +119,19 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

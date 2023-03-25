@@ -29,6 +29,7 @@
       <form style="padding:5%;" action="include/auth.php" method="post">
         <div class="card-header  align-items-center" style="text-align: center;">
           <img src="img/mainlogo.png" alt="logo" class="img" width="100px">
+          <h4 style="text-align: left;">Register as a Donar</h4>
         </div>
         <!-- ERROR -->
         <?php

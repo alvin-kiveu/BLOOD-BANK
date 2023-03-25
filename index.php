@@ -122,11 +122,11 @@
                                                                                     echo $age = $currentyear - $yearofbirth;
                                                                                     ?></span><br>
                                             </p>
-                                            <!-- <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary">MAKE REQUEST</button>
+                                                    <a href='request.php?usr=<?php echo $row['username']; ?>'  class="btn btn-sm btn-outline-primary">MAKE REQUEST</a>
                                                 </div>
-                                            </div> -->
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>

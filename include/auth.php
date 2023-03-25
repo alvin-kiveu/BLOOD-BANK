@@ -84,3 +84,39 @@ if(isset($_POST['login'])){
     echo "<script>window.location.href='../login.php?error=Username does not exists';</script>";
   }
 }
+
+if(isset($_POST['adminlogin'])){
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+  $password = md5($password_1);
+    //CHECK IF USERNAME EXISTS IN members TABLE
+    $check_username_result = mysqli_query($db, "SELECT * FROM users WHERE username = '$username'");
+    $check_username = mysqli_num_rows($check_username_result);
+    if($check_username > 0) {
+      //CHECK IF THE ACCOUNT EXISTS
+      $check_account_result = mysqli_query($db, "SELECT * FROM users WHERE username = '$username' AND password = '$password' LIMIT 1");
+      $check_account = mysqli_num_rows($check_account_result);
+      if($check_account > 0) {
+        //CREATE A SESSION
+        $_SESSION['adminusername'] = $username;
+        echo "<script>window.location.href='../admin/home.php';</script>";
+      }else{
+        echo "<script>window.location.href='../admin/login.php?error=Incorrect password';</script>";
+      }
+    }else{
+      echo "<script>window.location.href='../admin/login.php?error=Username does not exists';</script>";
+    }
+}
+
+
+if(isset($_POST['makerequest'])){
+  $fullnames = mysqli_real_escape_string($db, $_POST['fullnames']);
+  $phonenumber = mysqli_real_escape_string($db, $_POST['phonenumber']);
+  $location = mysqli_real_escape_string($db, $_POST['location']);
+  $bloodtype = mysqli_real_escape_string($db, $_POST['bloodtype']);
+  $info = mysqli_real_escape_string($db, $_POST['info']);
+  $userid = mysqli_real_escape_string($db, $_POST['userid']);
+
+  mysqli_query($db, "INSERT INTO  requests (username,fullnames,phonenumber,location,bloodtype,info) VALUES('$userid','$fullnames','$phonenumber','$location','$bloodtype','$info')");
+  echo "<script>window.location.href='../request.php?success=Request has being submited successfully';</script>";
+}
