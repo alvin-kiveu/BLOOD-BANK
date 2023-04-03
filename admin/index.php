@@ -1,3 +1,12 @@
+<?php
+//START SESSION
+session_start();
+include '../include/connection.php';
+if (isset($_SESSION['adminusername'])) {
+    echo "<script>window.location.href='home.php';</script>";
+}
+
+?>
 <!doctype html>
 <html lang="en">
 

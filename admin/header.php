@@ -2,7 +2,9 @@
 //START SESSION
 session_start();
 include '../include/connection.php';
-
+if (!isset($_SESSION['adminusername'])) {
+    echo "<script>window.location.href='index.php';</script>";
+}
 
 ?>
 <!doctype html>
@@ -21,43 +23,168 @@ include '../include/connection.php';
     <title>BLOAD BANK</title>
     <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../scss/main.css" />
+    <script src="https://kit.fontawesome.com/589a5b1ebd.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <script src="../assets/js/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 
 <body>
     <header>
-        <div class="collapse bg-primary" id="navbarHeader">
-            <div class="container">
-                <div class="row">
-
-                </div>
-            </div>
-        </div>
-        <div class="navbar navbar-primary bg-primary box-shadow d-flex fixed-top">
-            <div class="container d-flex justify-content-between">
+        <div class="navbar navbar-primary bg-primary box-shadow">
+            <div class="container d-flex justify-content-between align-items-center">
                 <a href="#" class="navbar-brand d-flex align-items-center">
                     <img src="../img/mainlogo.png" alt="logo" width="50" height="50">
                     <strong style="color:white; margin-left: 5%;"> BLOOD BANK</strong>
 
                 </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarHeader">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="home.php" class="nav-link  text-decoration-none">Dashboard</a>
+                        </li>
 
-                <a class="text-light text-decoration-non nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                <a class="text-light text-decoration-non nav-item nav-link" href="#">Features</a>
-                <a class="text-light text-decoration-non nav-item nav-link" href="#">Pricing</a>
-                <a class="text-light text-decoration-non nav-item nav-link disabled" href="#">Add User</a>
+                        <li class="nav-item">
+                            <a href="requests.php" class="nav-link  text-decoration-none">All Request</a>
+                        </li>
 
-                <?php
+                        <li class="nav-item">
+                            <a href="donors.php" class="nav-link  text-decoration-none">All Donors</a>
+                        </li>
 
-                if (isset($_SESSION['username'])) {
-                    echo '<div>
-                    <a href="logout.php" class="text-light text-decoration-none">Logout</a>
-                </div>';
-                } else {
-                    echo '<div>
-                    <a href="login.php" class="text-light text-decoration-none">Login</a>
-                    <a href="signup.php" class="text-light text-decoration-none">Sign up</a>
-                </div>';
-                }   ?>
+                        <li class="nav-item">
+                            <a href="logout.php" class="nav-link  text-decoration-none">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
+
+    <style>
+        .navbar-toggler {
+            border: none;
+            background-color: white;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .navbar-toggler-icon:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .navbar-toggler.collapsed:after {
+            transform: rotate(180deg);
+        }
+
+        .navbar-toggler.collapsed {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-toggler.collapsed:hover {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-toggler:hover {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-toggler:focus {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-toggler:active {
+            background-color: white;
+            color: red;
+        }
+
+        .navbar-toggler:visited {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-toggler:link {
+            background-color: white;
+            color: red;
+        }
+
+        .navbar-toggler:active {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-toggler:visited {
+            background-color: white;
+            color: #800211;
+        }
+
+        .navbar-nav li a {
+            color: white;
+            font-weight: 900;
+            padding: 16px;
+        }
+
+        .navbar-nav li {
+            border-bottom: 1px solid #fff;
+            color: white;
+        }
+        .icon-big{
+            padding: 16px;
+        }
+        .icon-big i{
+            font-size: 60px;
+            color: #800211;
+            
+        }
+
+        .navbar-nav li a:hover {
+            background-color: #fff;
+            color: #800211;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                width: 40px;
+                height: 40px;
+                margin-right: 5px;
+            }
+
+            .navbar-brand strong {
+                font-size: 1.2rem;
+            }
+
+            .navbar-toggler {
+                padding: 0.25rem 0.3rem;
+                font-size: 1.25rem;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            .navbar-nav .nav-item {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>

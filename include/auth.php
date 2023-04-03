@@ -101,10 +101,10 @@ if(isset($_POST['adminlogin'])){
         $_SESSION['adminusername'] = $username;
         echo "<script>window.location.href='../admin/home.php';</script>";
       }else{
-        echo "<script>window.location.href='../admin/login.php?error=Incorrect password';</script>";
+        echo "<script>window.location.href='../admin/index.php?error=Incorrect password';</script>";
       }
     }else{
-      echo "<script>window.location.href='../admin/login.php?error=Username does not exists';</script>";
+      echo "<script>window.location.href='../admin/index.php?error=Username does not exists';</script>";
     }
 }
 
